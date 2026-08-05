@@ -138,6 +138,27 @@ class DFineObjectDetectorTest(TestCase):
             },
         )
 
+    def test_num_classes_mismatch(self):
+        backbone = DFineBackbone(**self.base_backbone_kwargs)
+        self.assertEqual(backbone.num_labels, 4)
+        init_kwargs = {
+            "backbone": backbone,
+            "num_classes": 2,
+            "bounding_box_format": self.bounding_box_format,
+            "preprocessor": self.preprocessor,
+        }
+        self.run_task_test(
+            cls=DFineObjectDetector,
+            init_kwargs=init_kwargs,
+            train_data=self.train_data,
+            expected_output_shape={
+                "boxes": (1, 10, 4),
+                "labels": (1, 10),
+                "confidence": (1, 10),
+                "num_detections": (1,),
+            },
+        )
+
     @pytest.mark.large
     def test_saved_model(self):
         backbone = DFineBackbone(**self.base_backbone_kwargs)
@@ -153,6 +174,10 @@ class DFineObjectDetectorTest(TestCase):
             input_data=self.images,
         )
 
+    @pytest.mark.xfail(
+        condition=keras.backend.backend() == "torch",
+        reason="D-FINE's multi-scale features hit a torch.export shape guard.",
+    )
     def test_litert_export(self):
         backbone = DFineBackbone(**self.base_backbone_kwargs)
         init_kwargs = {

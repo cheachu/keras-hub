@@ -66,8 +66,14 @@ from keras_hub.src.layers.preprocessing.random_swap import (
 from keras_hub.src.layers.preprocessing.start_end_packer import (
     StartEndPacker as StartEndPacker,
 )
+from keras_hub.src.layers.preprocessing.video_converter import (
+    VideoConverter as VideoConverter,
+)
 from keras_hub.src.models.basnet.basnet_image_converter import (
     BASNetImageConverter as BASNetImageConverter,
+)
+from keras_hub.src.models.blip2.blip2_image_converter import (
+    BLIP2ImageConverter as BLIP2ImageConverter,
 )
 from keras_hub.src.models.clip.clip_image_converter import (
     CLIPImageConverter as CLIPImageConverter,
@@ -102,8 +108,26 @@ from keras_hub.src.models.efficientnet.efficientnet_image_converter import (
 from keras_hub.src.models.gemma3.gemma3_image_converter import (
     Gemma3ImageConverter as Gemma3ImageConverter,
 )
+from keras_hub.src.models.gemma3n.gemma3n_audio_converter import (
+    Gemma3nAudioConverter as Gemma3nAudioConverter,
+)
+from keras_hub.src.models.gemma3n.gemma3n_image_converter import (
+    Gemma3nImageConverter as Gemma3nImageConverter,
+)
+from keras_hub.src.models.gemma4.gemma4_audio_converter import (
+    Gemma4AudioConverter as Gemma4AudioConverter,
+)
+from keras_hub.src.models.gemma4.gemma4_image_converter import (
+    Gemma4ImageConverter as Gemma4ImageConverter,
+)
+from keras_hub.src.models.gemma4.gemma4_video_converter import (
+    Gemma4VideoConverter as Gemma4VideoConverter,
+)
 from keras_hub.src.models.hgnetv2.hgnetv2_image_converter import (
     HGNetV2ImageConverter as HGNetV2ImageConverter,
+)
+from keras_hub.src.models.metaclip_2.metaclip_2_image_converter import (
+    MetaCLIP2ImageConverter as MetaCLIP2ImageConverter,
 )
 from keras_hub.src.models.mit.mit_image_converter import (
     MiTImageConverter as MiTImageConverter,
@@ -122,6 +146,12 @@ from keras_hub.src.models.pali_gemma.pali_gemma_image_converter import (
 )
 from keras_hub.src.models.parseq.parseq_image_converter import (
     PARSeqImageConverter as PARSeqImageConverter,
+)
+from keras_hub.src.models.qwen3_5.qwen3_5_image_converter import (
+    Qwen3_5ImageConverter as Qwen3_5ImageConverter,
+)
+from keras_hub.src.models.qwen3_5.qwen3_5_video_converter import (
+    Qwen3_5VideoConverter as Qwen3_5VideoConverter,
 )
 from keras_hub.src.models.resnet.resnet_image_converter import (
     ResNetImageConverter as ResNetImageConverter,
@@ -164,6 +194,12 @@ from keras_hub.src.models.segformer.segformer_image_converter import (
 )
 from keras_hub.src.models.siglip.siglip_image_converter import (
     SigLIPImageConverter as SigLIPImageConverter,
+)
+from keras_hub.src.models.swin_transformer.swin_transformer_image_converter import (
+    SwinTransformerImageConverter as SwinTransformerImageConverter,
+)
+from keras_hub.src.models.t5gemma2.t5gemma2_image_converter import (
+    T5Gemma2ImageConverter as T5Gemma2ImageConverter,
 )
 from keras_hub.src.models.vgg.vgg_image_converter import (
     VGGImageConverter as VGGImageConverter,

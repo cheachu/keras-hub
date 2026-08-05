@@ -1,3 +1,4 @@
+import keras
 import numpy as np
 import pytest
 
@@ -88,18 +89,15 @@ class SAM3PromptableConceptImageSegmenterTest(TestCase):
             crop_to_aspect_ratio=False,
             antialias=True,
         )
-        self.tokenizer = SAM3Tokenizer(
-            {
-                "!": 0,
-                '"': 1,
-                "#": 2,
-                "$": 3,
-                "%": 4,
-                "<|endoftext|>": 5,
-                "<|startoftext|>": 6,
-            },
-            ["i n", "t h", "a n"],
-        )
+        merges = ["i n", "t h", "a n"]
+        vocab = []
+        for merge in merges:
+            a, b = merge.split(" ")
+            vocab.extend([a, b, a + b])
+        vocab += ["!", '"', "#", "$", "%", "<|endoftext|>", "<|startoftext|>"]
+        vocab = sorted(set(vocab))  # Remove duplicates
+        vocab = dict([(token, i) for i, token in enumerate(vocab)])
+        self.tokenizer = SAM3Tokenizer(vocab, merges)
         self.preprocessor = SAM3PromptableConceptImageSegmenterPreprocessor(
             self.tokenizer, self.image_converter
         )
@@ -168,6 +166,10 @@ class SAM3PromptableConceptImageSegmenterTest(TestCase):
                 },
             )
 
+    @pytest.mark.xfail(
+        condition=keras.backend.backend() == "torch",
+        reason="torchvision::nms is not registered in the torch.export op set.",
+    )
     def test_litert_export(self):
         self.run_litert_export_test(
             cls=SAM3PromptableConceptImageSegmenter,
